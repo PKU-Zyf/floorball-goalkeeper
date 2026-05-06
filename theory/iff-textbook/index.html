@@ -32,7 +32,11 @@
     .drill-card td:first-child { font-weight: 600; white-space: nowrap; width: 100px; color: var(--sage-dark); }
 
     .img-figure { text-align: center; margin: 2rem 0; }
-    .img-figure img { max-width: 100%; max-height: 60vh; object-fit: contain; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+    .img-figure img { max-width: 40vw; max-height: 40vh; object-fit: contain; border-radius: var(--radius); box-shadow: var(--shadow-sm); cursor: zoom-in; }
+
+    /* 全屏看图遮罩 */
+    .img-fullscreen-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; display: flex; align-items: center; justify-content: center; cursor: zoom-out; }
+    .img-fullscreen-overlay img { max-width: 95vw; max-height: 95vh; object-fit: contain; border-radius: 0; box-shadow: none; cursor: zoom-out; }
     .img-figure figcaption { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; }
 
     .table-wrap { overflow-x: auto; margin: 1.5rem 0; }
@@ -1156,5 +1160,22 @@
 </footer>
 
 <script src="../../js/main.js"></script>
+<script>
+  document.querySelectorAll('.img-figure img').forEach(img => {
+    img.addEventListener('click', function() {
+      const overlay = document.createElement('div');
+      overlay.className = 'img-fullscreen-overlay';
+      const fi = document.createElement('img');
+      fi.src = this.src;
+      fi.alt = this.alt;
+      overlay.appendChild(fi);
+      function close() { overlay.remove(); document.removeEventListener('keydown', onKey); }
+      function onKey(e) { if (e.key === 'Escape') close(); }
+      overlay.addEventListener('click', close);
+      document.addEventListener('keydown', onKey);
+      document.body.appendChild(overlay);
+    });
+  });
+</script>
 </body>
 </html>
