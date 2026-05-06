@@ -6,7 +6,7 @@
   <meta name="description" content="软式曲棍球守门员教学视频——B站视频整理，页面内嵌播放">
   <title>教学视频 — 软曲守门技术</title>
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>“>
   <style>
     /* 视频页面额外样式 */
     .video-section {
@@ -47,20 +47,39 @@
       box-shadow: var(--shadow-md);
     }
 
-    /* 响应式 16:9 播放器容器 */
+    /* 视频播放器容器 — 点击播放，尺寸约束 */
     .video-embed-wrapper {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%;
+      max-width: 40vw;
+      max-height: 40vh;
+      margin: 0 auto;
       background: #000;
+      cursor: pointer;
+      border-radius: var(--radius) var(--radius) 0 0;
+      overflow: hidden;
     }
     .video-embed-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
-      height: 100%;
+      aspect-ratio: 16 / 9;
       border: 0;
+      display: block;
+    }
+    .video-play-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1a1a2e;
+    }
+    .video-play-placeholder svg {
+      width: 48px;
+      height: 48px;
+      opacity: 0.7;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .video-embed-wrapper:hover .video-play-placeholder svg {
+      opacity: 1;
+      transform: scale(1.1);
     }
 
     /* 视频信息栏 */
@@ -160,6 +179,13 @@
       color: #FB7299;
     }
 
+
+    @media (max-width: 768px) {
+      .video-embed-wrapper {
+        max-width: 90vw;
+      }
+    }
+
     /* 响应式 */
     @media (max-width: 768px) {
       .video-embed-info {
@@ -201,13 +227,7 @@
 </header>
 
 <section class="content-list">
-
-  <!-- 搜索入口 -->
-  <div class="search-hint">
-    <p>以下视频均来自 <span class="bili-pink">B 站（哔哩哔哩）</span>，已内嵌播放器可直接观看。</p>
-  </div>
-
-  <!-- ========== 一、守门员专项教学 ========== -->
+<!-- ========== 一、守门员专项教学 ========== -->
   <div class="video-section">
     <h2 class="video-section-title"><span class="icon">🥅</span> 守门员专项教学</h2>
     <p class="video-section-desc">涵盖基本姿势、移动步伐、扑救技术、热身训练等守门员核心技能，共 14 个视频。</p>
@@ -216,9 +236,11 @@
     <h3 class="video-subsection-title">基础教学<span class="video-subsection-count">5 个视频</span></h3>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Q64y1S7xH" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1Q64y1S7xH" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">01</span>
         <div class="video-embed-text">
@@ -230,9 +252,11 @@
     </div>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1nf4y1s7fe" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1nf4y1s7fe" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">02</span>
         <div class="video-embed-text">
@@ -244,9 +268,11 @@
     </div>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1EA411L7ZC" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1EA411L7ZC" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">03</span>
         <div class="video-embed-text">
@@ -258,9 +284,11 @@
     </div>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1gV411H7Sc" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1gV411H7Sc" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">04</span>
         <div class="video-embed-text">
@@ -272,9 +300,11 @@
     </div>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1cBDsBwEFM" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1cBDsBwEFM" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">05</span>
         <div class="video-embed-text">
@@ -289,9 +319,11 @@
     <h3 class="video-subsection-title">热身训练<span class="video-subsection-count">3 个视频</span></h3>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1sx4y1Y7zH" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1sx4y1Y7zH" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">01</span>
         <div class="video-embed-text">
@@ -303,9 +335,11 @@
     </div>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1HZDPY7EpX" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1HZDPY7EpX" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">02</span>
         <div class="video-embed-text">
@@ -317,9 +351,11 @@
     </div>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV17kjbzNEF8" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV17kjbzNEF8" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">03</span>
         <div class="video-embed-text">
@@ -334,9 +370,11 @@
     <h3 class="video-subsection-title">技术训练<span class="video-subsection-count">4 个视频</span></h3>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1NfPAzLEWj" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1NfPAzLEWj" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">01</span>
         <div class="video-embed-text">
@@ -348,9 +386,11 @@
     </div>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1F94y1778n" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1F94y1778n" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">02</span>
         <div class="video-embed-text">
@@ -362,9 +402,11 @@
     </div>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1AN4y12761" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1AN4y12761" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">03</span>
         <div class="video-embed-text">
@@ -376,9 +418,11 @@
     </div>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1ux411j7gP" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1ux411j7gP" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">04</span>
         <div class="video-embed-text">
@@ -393,9 +437,11 @@
     <h3 class="video-subsection-title">实战视频<span class="video-subsection-count">2 个视频</span></h3>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1EN411a7Xm" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1EN411a7Xm" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">01</span>
         <div class="video-embed-text">
@@ -407,9 +453,11 @@
     </div>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1jX4y137oN" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1jX4y137oN" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">02</span>
         <div class="video-embed-text">
@@ -427,9 +475,11 @@
     <p class="video-section-desc">软式曲棍球比赛规则、运动起源与整体介绍，共 2 个视频。</p>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Gk4y1p7f9" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1Gk4y1p7f9" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">01</span>
         <div class="video-embed-text">
@@ -441,9 +491,11 @@
     </div>
 
     <div class="video-embed-card">
-      <div class="video-embed-wrapper">
-        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Y54y1b7yn" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-      </div>
+      <div class="video-embed-wrapper" data-bvid="BV1Y54y1b7yn" onclick="loadBiliVideo(this)">
+          <div class="video-play-placeholder">
+            <svg viewBox="0 0 24 24" fill="#fff"><polygon points="7,5 19,12 7,19"/></svg>
+          </div>
+        </div>
       <div class="video-embed-info">
         <span class="video-embed-num">02</span>
         <div class="video-embed-text">
@@ -454,14 +506,6 @@
       </div>
     </div>
   </div>
-
-  <!-- 收录说明 -->
-  <div class="search-hint" style="margin-top: 2rem;">
-    <p>以上视频共计 <strong>16</strong> 个、分为 <strong>5 个子类</strong>：基础教学（5）、热身训练（3）、技术训练（4）、实战视频（2）、规则与介绍（2）。</p>
-    <p>统一使用译名 <strong>"软式曲棍球"</strong>（原视频中提及的"旱地冰球""地板球""福乐球"均为同一运动）。</p>
-    <p style="margin-top:0.3rem;">全部视频来自 <span class="bili-pink">哔哩哔哩（B站）</span>，点击"在 B 站打开"可跳转观看完整页面。</p>
-  </div>
-
 </section>
 
 <footer class="footer">
@@ -473,5 +517,14 @@
 </footer>
 
 <script src="../js/main.js"></script>
+
+<script>
+function loadBiliVideo(el) {
+  var bvid = el.dataset.bvid;
+  el.onclick = null;
+  el.style.cursor = 'default';
+  el.innerHTML = '<iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=' + bvid + '" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>';
+}
+</script>
 </body>
 </html>
