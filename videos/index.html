@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="软式曲棍球守门员教学视频——B站视频整理">
+  <meta name="description" content="软式曲棍球守门员教学视频——B站视频整理，页面内嵌播放">
   <title>教学视频 — 软曲守门技术</title>
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
@@ -33,92 +33,97 @@
       margin-bottom: 1.5rem;
       padding-left: 2.4rem;
     }
-    .video-link {
-      display: flex;
-      gap: 1.2rem;
-      padding: 1.2rem 1.5rem;
+
+    /* 嵌入卡片 */
+    .video-embed-card {
       background: var(--white);
       border-radius: var(--radius);
       box-shadow: var(--shadow-sm);
-      margin-bottom: 0.8rem;
+      margin-bottom: 2rem;
+      overflow: hidden;
       transition: all var(--transition);
-      border-left: 3px solid transparent;
-      text-decoration: none;
-      color: inherit;
-      align-items: center;
     }
-    .video-link:hover {
+    .video-embed-card:hover {
       box-shadow: var(--shadow-md);
-      border-left-color: var(--sage);
-      transform: translateX(4px);
     }
-    .video-link-num {
+
+    /* 响应式 16:9 播放器容器 */
+    .video-embed-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #000;
+    }
+    .video-embed-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* 视频信息栏 */
+    .video-embed-info {
+      display: flex;
+      gap: 1rem;
+      padding: 1.2rem 1.5rem;
+      align-items: flex-start;
+    }
+    .video-embed-num {
       font-family: var(--font-en-heading);
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: var(--sage-light);
-      min-width: 30px;
+      min-width: 32px;
       text-align: center;
       flex-shrink: 0;
+      line-height: 1.3;
     }
-    .video-link-info {
+    .video-embed-text {
       flex: 1;
       min-width: 0;
     }
-    .video-link-info .title {
+    .video-embed-text .title {
       font-size: 0.95rem;
       font-weight: 500;
       color: var(--text);
       line-height: 1.5;
-      word-break: break-all;
+      margin-bottom: 0.25rem;
     }
-    .video-link-info .meta {
+    .video-embed-text .meta {
       font-size: 0.8rem;
       color: var(--text-muted);
-      margin-top: 0.2rem;
+      line-height: 1.5;
     }
-    .video-link .external-icon {
-      flex-shrink: 0;
-      color: var(--text-muted);
-      opacity: 0.5;
-      transition: opacity var(--transition);
+    .video-embed-text .bili-link {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-size: 0.78rem;
+      color: #FB7299;
+      text-decoration: none;
+      transition: opacity 0.2s;
     }
-    .video-link:hover .external-icon {
-      opacity: 1;
-      color: var(--terracotta);
+    .video-embed-text .bili-link:hover {
+      opacity: 0.8;
     }
-    .video-platform-badge {
+    .video-embed-text .bili-link svg {
+      vertical-align: -2px;
+      margin-left: 2px;
+    }
+
+    /* 合集标签 */
+    .collection-badge {
       display: inline-block;
       font-size: 0.7rem;
-      background: #FB7299;
-      color: #fff;
+      background: var(--sage-light);
+      color: var(--sage-dark);
       padding: 1px 8px;
       border-radius: 10px;
-      margin-left: 0.5rem;
+      margin-left: 0.4rem;
       vertical-align: middle;
+      font-weight: 500;
     }
-    /* 分类标签 */
-    .video-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-bottom: 2rem;
-      justify-content: center;
-    }
-    .video-tag {
-      padding: 6px 18px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      border: 1.5px solid var(--sage-light);
-      color: var(--sage-dark);
-      cursor: pointer;
-      transition: all var(--transition);
-      background: transparent;
-    }
-    .video-tag:hover, .video-tag.active {
-      background: var(--sage-dark);
-      color: var(--white);
-      border-color: var(--sage-dark);
-    }
+
     /* 搜索提示 */
     .search-hint {
       text-align: center;
@@ -135,18 +140,18 @@
     .search-hint .bili-pink {
       color: #FB7299;
     }
+
     /* 响应式 */
     @media (max-width: 768px) {
-      .video-link {
-        flex-direction: row;
+      .video-embed-info {
         padding: 1rem;
-        gap: 0.8rem;
+        gap: 0.6rem;
       }
-      .video-link-num {
+      .video-embed-num {
         font-size: 1.1rem;
         min-width: 24px;
       }
-      .video-link-info .title {
+      .video-embed-text .title {
         font-size: 0.85rem;
       }
       .video-section-title {
@@ -172,16 +177,16 @@
 <header class="page-hero">
   <a href="/floorball-goalkeeper/" class="back-link">← 返回首页</a>
   <h1>教学视频</h1>
-  <p class="en-subtitle">Video Tutorials &amp; Match Highlights</p>
-  <p style="color:var(--text-muted);font-size:0.9rem;margin-top:0.5rem;">视频来源：<span style="color:#FB7299;">哔哩哔哩</span> &mdash; 点击标题跳转 B 站观看</p>
+  <p class="en-subtitle">Video Tutorials &amp; Guides</p>
+  <p style="color:var(--text-muted);font-size:0.9rem;margin-top:0.5rem;">视频来源：<span style="color:#FB7299;">哔哩哔哩</span> &mdash; 页面内嵌播放，也可跳转 B 站观看</p>
 </header>
 
 <section class="content-list">
 
   <!-- 搜索入口 -->
   <div class="search-hint">
-    <p>📺 以下视频均来自 <span class="bili-pink">B 站（哔哩哔哩）</span>，点击标题即可跳转观看。</p>
-    <p style="margin-top:0.3rem;">也可在 B 站直接搜索：<a href="https://search.bilibili.com/all?keyword=软式曲棍球 守门员" target="_blank" rel="noopener">软式曲棍球 守门员</a>、<a href="https://search.bilibili.com/all?keyword=floorball goalkeeper" target="_blank" rel="noopener">floorball goalkeeper</a></p>
+    <p>📺 以下视频均来自 <span class="bili-pink">B 站（哔哩哔哩）</span>，已内嵌播放器可直接观看。</p>
+    <p style="margin-top:0.3rem;">更多视频可在 B 站搜索：<a href="https://search.bilibili.com/all?keyword=软式曲棍球 守门员" target="_blank" rel="noopener">软式曲棍球 守门员</a>、<a href="https://search.bilibili.com/all?keyword=floorball goalkeeper" target="_blank" rel="noopener">floorball goalkeeper</a></p>
   </div>
 
   <!-- ========== 一、守门员专项教学 ========== -->
@@ -189,381 +194,169 @@
     <h2 class="video-section-title"><span class="icon">🥅</span> 守门员专项教学</h2>
     <p class="video-section-desc">涵盖基本姿势、移动步伐、扑救技术、动态热身、点球扑救等守门员核心技能。</p>
 
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=地板球 软式曲棍球 守门员教学 第一弹" target="_blank" rel="noopener">
-      <span class="video-link-num">01</span>
-      <span class="video-link-info">
-        <span class="title">【地板球/软式曲棍球】守门员教学 - 第一弹！ Goalkeeping - Part 1</span>
-        <span class="meta">守门员基础教学 · 入门篇</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
+    <!-- 01. 守门员教学合集 -->
+    <div class="video-embed-card">
+      <div class="video-embed-wrapper">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Q64y1S7xH" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+      <div class="video-embed-info">
+        <span class="video-embed-num">01</span>
+        <div class="video-embed-text">
+          <div class="title">【地板球/软式曲棍球】守门员教学合集<span class="collection-badge">合集</span></div>
+          <div class="meta">含基础教学（第一弹）、专项训练（第三/四弹）、扑点技巧、移动步伐训练、守门核心技巧等</div>
+          <a class="bili-link" href="https://www.bilibili.com/video/BV1Q64y1S7xH/" target="_blank" rel="noopener">在 B 站打开 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
 
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=地板球 软式曲棍球 守门员教学 第三弹" target="_blank" rel="noopener">
-      <span class="video-link-num">02</span>
-      <span class="video-link-info">
-        <span class="title">【地板球/软式曲棍球】守门员教学 - 第三弹！ Goalkeeping - Part 3 (drills)</span>
-        <span class="meta">守门员专项训练 · 进阶篇</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
+    <!-- 02. 守门员基本姿势 -->
+    <div class="video-embed-card">
+      <div class="video-embed-wrapper">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1cBDsBwEFM" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+      <div class="video-embed-info">
+        <span class="video-embed-num">02</span>
+        <div class="video-embed-text">
+          <div class="title">阳光体育校园冰雪软式曲棍球教学：守门员基本姿势</div>
+          <div class="meta">基本姿势 · 入门动作规范</div>
+          <a class="bili-link" href="https://www.bilibili.com/video/BV1cBDsBwEFM/" target="_blank" rel="noopener">在 B 站打开 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
 
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=地板球 软式曲棍球 守门员教学 第四弹" target="_blank" rel="noopener">
-      <span class="video-link-num">03</span>
-      <span class="video-link-info">
-        <span class="title">【地板球/软式曲棍球】守门员教学 - 第四弹！ Goalkeeping - Part 4 (drills)</span>
-        <span class="meta">守门员专项训练 · 高阶篇</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
+    <!-- 03. 门将动态热身 -->
+    <div class="video-embed-card">
+      <div class="video-embed-wrapper">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1sx4y1Y7zH" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+      <div class="video-embed-info">
+        <span class="video-embed-num">03</span>
+        <div class="video-embed-text">
+          <div class="title">软式曲棍球门将动态热身</div>
+          <div class="meta">赛前热身 · 动态拉伸训练</div>
+          <a class="bili-link" href="https://www.bilibili.com/video/BV1sx4y1Y7zH/" target="_blank" rel="noopener">在 B 站打开 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
 
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=阳光体育 校园冰雪 软式曲棍球 守门员基本姿势" target="_blank" rel="noopener">
-      <span class="video-link-num">04</span>
-      <span class="video-link-info">
-        <span class="title">阳光体育校园冰雪软式曲棍球教学：守门员基本姿势</span>
-        <span class="meta">基本姿势 · 入门动作规范</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
+    <!-- 04. 20个极限神扑 -->
+    <div class="video-embed-card">
+      <div class="video-embed-wrapper">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1ek4y1q77C" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+      <div class="video-embed-info">
+        <span class="video-embed-num">04</span>
+        <div class="video-embed-text">
+          <div class="title">软式曲棍球中的20个极限神扑！</div>
+          <div class="meta">精彩扑救集锦 · 观赏学习</div>
+          <a class="bili-link" href="https://www.bilibili.com/video/BV1ek4y1q77C/" target="_blank" rel="noopener">在 B 站打开 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
 
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=软式曲棍球门将动态热身" target="_blank" rel="noopener">
-      <span class="video-link-num">05</span>
-      <span class="video-link-info">
-        <span class="title">软式曲棍球门将动态热身</span>
-        <span class="meta">赛前热身 · 动态拉伸训练</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
+    <!-- 05. 单人对墙练习 -->
+    <div class="video-embed-card">
+      <div class="video-embed-wrapper">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Z44y1K7cz" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+      <div class="video-embed-info">
+        <span class="video-embed-num">05</span>
+        <div class="video-embed-text">
+          <div class="title">软式曲棍球门将单人对墙练习</div>
+          <div class="meta">个人训练 · 对墙练习法</div>
+          <a class="bili-link" href="https://www.bilibili.com/video/BV1Z44y1K7cz/" target="_blank" rel="noopener">在 B 站打开 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
 
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=软式曲棍球 守门员扑点技巧和案例" target="_blank" rel="noopener">
-      <span class="video-link-num">06</span>
-      <span class="video-link-info">
-        <span class="title">软式曲棍球 | 守门员扑点技巧和案例</span>
-        <span class="meta">点球扑救 · 实战技巧分析</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
+    <!-- 06. FLOORBALL GOALIE TRAINING -->
+    <div class="video-embed-card">
+      <div class="video-embed-wrapper">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1cb411J7UG" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+      <div class="video-embed-info">
+        <span class="video-embed-num">06</span>
+        <div class="video-embed-text">
+          <div class="title">FLOORBALL GOALIE TRAINING</div>
+          <div class="meta">英文教学 · 守门员专项训练</div>
+          <a class="bili-link" href="https://www.bilibili.com/video/BV1cb411J7UG/" target="_blank" rel="noopener">在 B 站打开 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
 
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=软式曲棍球中的20个极限神扑" target="_blank" rel="noopener">
-      <span class="video-link-num">07</span>
-      <span class="video-link-info">
-        <span class="title">软式曲棍球中的20个极限神扑！</span>
-        <span class="meta">精彩扑救集锦 · 观赏学习</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
+    <!-- 07. 三种封堵技术动作 -->
+    <div class="video-embed-card">
+      <div class="video-embed-wrapper">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1AQ67YYEvs" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+      <div class="video-embed-info">
+        <span class="video-embed-num">07</span>
+        <div class="video-embed-text">
+          <div class="title">守门员的三种封堵技术动作</div>
+          <div class="meta">封堵技术 · K字封堵等</div>
+          <a class="bili-link" href="https://www.bilibili.com/video/BV1AQ67YYEvs/" target="_blank" rel="noopener">在 B 站打开 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
 
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=软式曲棍球门将移动的几种训练" target="_blank" rel="noopener">
-      <span class="video-link-num">08</span>
-      <span class="video-link-info">
-        <span class="title">软式曲棍球门将移动的几种训练</span>
-        <span class="meta">门线移动 · 步伐训练</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=软曲棍球守门技巧" target="_blank" rel="noopener">
-      <span class="video-link-num">09</span>
-      <span class="video-link-info">
-        <span class="title">软曲棍球守门技巧</span>
-        <span class="meta">守门核心技巧讲解</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=软式曲棍球 守门员可以进球吗" target="_blank" rel="noopener">
-      <span class="video-link-num">10</span>
-      <span class="video-link-info">
-        <span class="title">软式曲棍球守门员可以进球吗？！</span>
-        <span class="meta">趣味集锦 · 守门员进攻时刻</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=软式曲棍球门将单人对墙练习" target="_blank" rel="noopener">
-      <span class="video-link-num">11</span>
-      <span class="video-link-info">
-        <span class="title">软式曲棍球门将单人对墙练习</span>
-        <span class="meta">个人训练 · 对墙练习法</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=FLOORBALL GOALIE TRAINING" target="_blank" rel="noopener">
-      <span class="video-link-num">12</span>
-      <span class="video-link-info">
-        <span class="title">FLOORBALL GOALIE TRAINING</span>
-        <span class="meta">英文教学 · 守门员专项训练</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=守门员的三种封堵技术动作" target="_blank" rel="noopener">
-      <span class="video-link-num">13</span>
-      <span class="video-link-info">
-        <span class="title">守门员的三种封堵技术动作</span>
-        <span class="meta">封堵技术 · K字封堵等</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=GataGoalie 冰球守门员 越门柱" target="_blank" rel="noopener">
-      <span class="video-link-num">14</span>
-      <span class="video-link-info">
-        <span class="title">【GataGoalie】冰球守门员技术之"越门柱"（中英）</span>
-        <span class="meta">门柱技术 · 中英双语</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
+    <!-- 08. GataGoalie 越门柱 -->
+    <div class="video-embed-card">
+      <div class="video-embed-wrapper">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1oF411D77F" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+      <div class="video-embed-info">
+        <span class="video-embed-num">08</span>
+        <div class="video-embed-text">
+          <div class="title">【GataGoalie】冰球守门员技术之"越门柱"（中英）</div>
+          <div class="meta">门柱技术 · 中英双语</div>
+          <a class="bili-link" href="https://www.bilibili.com/video/BV1oF411D77F/" target="_blank" rel="noopener">在 B 站打开 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- ========== 二、赛事录像与集锦 ========== -->
+  <!-- ========== 二、规则入门与运动介绍 ========== -->
   <div class="video-section">
-    <h2 class="video-section-title"><span class="icon">🏆</span> 赛事录像与集锦</h2>
-    <p class="video-section-desc">国际和国内软式曲棍球赛事录像、精彩集锦、进球精选。</p>
+    <h2 class="video-section-title"><span class="icon">📖</span> 规则入门与运动介绍</h2>
+    <p class="video-section-desc">软式曲棍球比赛规则、运动起源与整体介绍。</p>
 
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=2021年U19男子软式曲棍球世锦赛 半决赛 瑞典 捷克" target="_blank" rel="noopener">
-      <span class="video-link-num">01</span>
-      <span class="video-link-info">
-        <span class="title">2021年U19男子软式曲棍球世锦赛 半决赛 瑞典vs捷克（直播录像）</span>
-        <span class="meta">U19世锦赛 · 半决赛录像</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
+    <!-- 01. APRX软式曲棍球介绍 -->
+    <div class="video-embed-card">
+      <div class="video-embed-wrapper">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Gk4y1p7f9" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+      <div class="video-embed-info">
+        <span class="video-embed-num">01</span>
+        <div class="video-embed-text">
+          <div class="title">APRX软式曲棍球介绍<span class="collection-badge">合集</span></div>
+          <div class="meta">含规则篇与起源篇 · 比赛规则全面讲解 + 运动起源历史背景</div>
+          <a class="bili-link" href="https://www.bilibili.com/video/BV1Gk4y1p7f9/" target="_blank" rel="noopener">在 B 站打开 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
 
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=U19软式曲棍球世界杯决赛 瑞典 瑞士 集锦" target="_blank" rel="noopener">
-      <span class="video-link-num">02</span>
-      <span class="video-link-info">
-        <span class="title">热血沸腾！U19软式曲棍球世界杯决赛（瑞典 vs. 瑞士）集锦</span>
-        <span class="meta">U19世界杯 · 决赛集锦</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=2022WFC 男子半决赛 回顾" target="_blank" rel="noopener">
-      <span class="video-link-num">03</span>
-      <span class="video-link-info">
-        <span class="title">精彩赛事回顾直播——2022WFC男子半决赛回顾</span>
-        <span class="meta">2022世界锦标赛 · 半决赛</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=U19 World Floorball Championships Top 10 Goals" target="_blank" rel="noopener">
-      <span class="video-link-num">04</span>
-      <span class="video-link-info">
-        <span class="title">U19 World Floorball Championships Top 10 Goals</span>
-        <span class="meta">U19世锦赛 · 十佳进球</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=哈尔滨工业大学 软式曲棍球比赛" target="_blank" rel="noopener">
-      <span class="video-link-num">05</span>
-      <span class="video-link-info">
-        <span class="title">哈尔滨工业大学软式曲棍球比赛（材料VS基础学部）</span>
-        <span class="meta">国内校园赛事 · 哈工大</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=全国青少年软式曲棍球联赛 上海赛区 U12" target="_blank" rel="noopener">
-      <span class="video-link-num">06</span>
-      <span class="video-link-info">
-        <span class="title">全国青少年软式曲棍球联赛上海赛区U12比赛</span>
-        <span class="meta">青少年联赛 · U12</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=2017年 国家集训队 Shanghai Hakka 交流赛 软式曲棍球" target="_blank" rel="noopener">
-      <span class="video-link-num">07</span>
-      <span class="video-link-info">
-        <span class="title">2017年6月 国家集训队 VS Shanghai Hakka（交流赛）</span>
-        <span class="meta">国家队交流赛录像</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=2024 上海 阳光大联赛 旱地冰球 决赛 上外 工程大" target="_blank" rel="noopener">
-      <span class="video-link-num">08</span>
-      <span class="video-link-info">
-        <span class="title">2024上海市阳光大联赛旱地冰球甲组决赛 上外VS工程大</span>
-        <span class="meta">上海高校联赛 · 决赛</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=软式曲棍球全国赛 vlog" target="_blank" rel="noopener">
-      <span class="video-link-num">09</span>
-      <span class="video-link-info">
-        <span class="title">软式曲棍球全国赛vlog</span>
-        <span class="meta">全国赛 · 赛事记录</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=DHU FLOORBALL 女子 进球全纪录" target="_blank" rel="noopener">
-      <span class="video-link-num">10</span>
-      <span class="video-link-info">
-        <span class="title">DHU FLOORBALL女子3+1进球全纪录</span>
-        <span class="meta">东华大学 · 女子比赛</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=软式曲棍球失误搞笑集锦" target="_blank" rel="noopener">
-      <span class="video-link-num">11</span>
-      <span class="video-link-info">
-        <span class="title">软式曲棍球失误搞笑集锦3</span>
-        <span class="meta">趣味集锦 · 轻松一刻</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=旱地冰球超燃进球集锦" target="_blank" rel="noopener">
-      <span class="video-link-num">12</span>
-      <span class="video-link-info">
-        <span class="title">旱地冰球超燃进球集锦！！</span>
-        <span class="meta">精彩进球合集</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=Emil Ruud Floorball Magician Top 10 Goals" target="_blank" rel="noopener">
-      <span class="video-link-num">13</span>
-      <span class="video-link-info">
-        <span class="title">Emil Ruud - Floorball Magician Top 10 Goals (2020-21)</span>
-        <span class="meta">世界级球星 · 十佳进球</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-  </div>
-
-  <!-- ========== 三、规则入门与装备 ========== -->
-  <div class="video-section">
-    <h2 class="video-section-title"><span class="icon">📖</span> 规则入门与装备</h2>
-    <p class="video-section-desc">软式曲棍球规则讲解、运动起源介绍、球杆和装备选择指南。</p>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=APRX软式曲棍球介绍 规则篇 旱地冰球" target="_blank" rel="noopener">
-      <span class="video-link-num">01</span>
-      <span class="video-link-info">
-        <span class="title">APRX软式曲棍球介绍-规则篇（旱地冰球介绍）</span>
-        <span class="meta">比赛规则 · 全面讲解</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=APRX软式曲棍球介绍 起源篇 旱地冰球" target="_blank" rel="noopener">
-      <span class="video-link-num">02</span>
-      <span class="video-link-info">
-        <span class="title">APRX软式曲棍球介绍-起源篇（旱地冰球介绍）</span>
-        <span class="meta">运动起源 · 历史背景</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=IFF This is Floorball 2021 软式曲棍球 宣传片" target="_blank" rel="noopener">
-      <span class="video-link-num">03</span>
-      <span class="video-link-info">
-        <span class="title">这就是软式曲棍球！（IFF最新版宣传片）—— IFF This is Floorball! 2021</span>
-        <span class="meta">IFF官方宣传片 · 运动概览</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=如何选择一根合格的软式曲棍球球杆" target="_blank" rel="noopener">
-      <span class="video-link-num">04</span>
-      <span class="video-link-info">
-        <span class="title">如何选择一根合格的软式曲棍球球杆</span>
-        <span class="meta">装备选择 · 球杆指南</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=软式曲棍球 F1球杆 球 介绍" target="_blank" rel="noopener">
-      <span class="video-link-num">05</span>
-      <span class="video-link-info">
-        <span class="title">软式曲棍球-F1球杆和球介绍</span>
-        <span class="meta">装备详解 · F1球杆</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=软式曲棍球杆 F0 特点讲解" target="_blank" rel="noopener">
-      <span class="video-link-num">06</span>
-      <span class="video-link-info">
-        <span class="title">软式曲棍球杆F0特点讲解</span>
-        <span class="meta">装备详解 · F0球杆</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=阳光体育 校园冰雪 软式曲棍球 球杆介绍 握杆方式" target="_blank" rel="noopener">
-      <span class="video-link-num">07</span>
-      <span class="video-link-info">
-        <span class="title">阳光体育校园冰雪软式曲棍球教学：球杆介绍及握杆方式</span>
-        <span class="meta">握杆姿势 · 基础入门</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=阳光体育 校园冰雪 软式曲棍球教学 射门练习" target="_blank" rel="noopener">
-      <span class="video-link-num">08</span>
-      <span class="video-link-info">
-        <span class="title">阳光体育校园冰雪软式曲棍球教学：射门练习 &amp; 射门技术</span>
-        <span class="meta">校园教学 · 射门系列</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=阳光体育 校园冰雪 软式曲棍球 传球接球练习" target="_blank" rel="noopener">
-      <span class="video-link-num">09</span>
-      <span class="video-link-info">
-        <span class="title">阳光体育校园冰雪软式曲棍球教学：传球接球练习</span>
-        <span class="meta">校园教学 · 传接球</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=阳光体育 校园冰雪 软式曲棍球 任意球 防守战术" target="_blank" rel="noopener">
-      <span class="video-link-num">10</span>
-      <span class="video-link-info">
-        <span class="title">阳光体育校园冰雪软式曲棍球教学：任意球进攻及防守战术</span>
-        <span class="meta">校园教学 · 定位球战术</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-  </div>
-
-  <!-- ========== 四、训练日常与精选 ========== -->
-  <div class="video-section">
-    <h2 class="video-section-title"><span class="icon">🔥</span> 训练日常与精选</h2>
-    <p class="video-section-desc">日常训练记录、个人训练剪辑、趣味视频。</p>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=软式曲棍球 10月下半训练剪辑" target="_blank" rel="noopener">
-      <span class="video-link-num">01</span>
-      <span class="video-link-info">
-        <span class="title">【软式曲棍球】10月下半训练剪辑</span>
-        <span class="meta">训练日常 · 实战记录</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
-
-    <a class="video-link" href="https://search.bilibili.com/all?keyword=Finngoalie Training 冰球守门员 手眼协调" target="_blank" rel="noopener">
-      <span class="video-link-num">02</span>
-      <span class="video-link-info">
-        <span class="title">【Finngoalie Training】冰球守门员手眼协调性训练</span>
-        <span class="meta">辅助训练 · 手眼协调</span>
-      </span>
-      <svg class="external-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    </a>
+    <!-- 02. IFF官方宣传片 -->
+    <div class="video-embed-card">
+      <div class="video-embed-wrapper">
+        <iframe src="//player.bilibili.com/player.html?isOutside=true&bvid=BV1Y54y1b7yn" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+      </div>
+      <div class="video-embed-info">
+        <span class="video-embed-num">02</span>
+        <div class="video-embed-text">
+          <div class="title">这就是软式曲棍球！（IFF最新版宣传片）</div>
+          <div class="meta">IFF官方宣传片 · 运动概览 —— This is Floorball! 2021</div>
+          <a class="bili-link" href="https://www.bilibili.com/video/BV1Y54y1b7yn/" target="_blank" rel="noopener">在 B 站打开 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- 收录说明 -->
   <div class="search-hint" style="margin-top: 2rem;">
-    <p>📌 以上视频共计 <strong>39</strong> 条，按四大主题分类整理。</p>
+    <p>📌 以上视频共计 <strong>10</strong> 个（去重后），按两大主题分类整理，页面内嵌播放。</p>
+    <p>其中守门员教学合集（BV1Q64y1S7xH）和 APRX 介绍（BV1Gk4y1p7f9）为合集视频，涵盖多个分P内容。</p>
     <p>统一使用译名 <strong>"软式曲棍球"</strong>（原视频中提及的"旱地冰球""地板球""福乐球"均为同一运动）。</p>
-    <p style="margin-top:0.3rem;">全部视频来自 <span class="bili-pink">哔哩哔哩（B站）</span>，点击标题即可跳转观看。</p>
+    <p style="margin-top:0.3rem;">全部视频来自 <span class="bili-pink">哔哩哔哩（B站）</span>，点击"在 B 站打开"可跳转观看完整页面。</p>
   </div>
 
 </section>
