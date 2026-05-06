@@ -6,7 +6,137 @@
   <meta name="description" content="软式曲棍球（floorball）守门员技术——教材翻译、教学视频与实战经验">
   <title>软曲守门技术 — Floorball Goalkeeping</title>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥅</text></svg>“>
+  <link rel=”icon” href=”data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥅</text></svg>”>
+  <style>
+    /* --- 主页装饰 --- */
+    /* Hero 背景：添加细微几何纹理 */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 80%, var(--sage) 0.6px, transparent 0.6px),
+        radial-gradient(circle at 80% 20%, var(--terracotta) 0.6px, transparent 0.6px),
+        radial-gradient(circle at 60% 60%, var(--sage-light) 0.6px, transparent 0.6px);
+      background-size: 80px 80px, 100px 100px, 120px 120px;
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-icon { position: relative; z-index: 1; }
+    .hero-content { position: relative; z-index: 1; }
+
+    /* Hero 装饰线 */
+    .hero-rule {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 2rem;
+    }
+    .hero-rule-line {
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: var(--sage);
+      opacity: 0.5;
+    }
+    .hero-rule-dot {
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      opacity: 0.7;
+    }
+
+    /* 区域分隔线 */
+    .section-divider {
+      text-align: center;
+      padding: 0 2rem;
+      margin-top: -2rem;
+      position: relative;
+    }
+    .section-divider svg {
+      width: 100%;
+      max-width: 600px;
+      height: 40px;
+    }
+    .section-divider path {
+      stroke: var(--sage-light);
+      stroke-width: 1;
+      fill: none;
+      opacity: 0.5;
+    }
+
+    /* 卡片装饰：背景纹理 */
+    .card-media {
+      position: relative;
+    }
+    .card-media::before {
+      content: '';
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(139, 168, 136, 0.15);
+      pointer-events: none;
+    }
+    .card-media::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(196, 149, 106, 0.15);
+      pointer-events: none;
+    }
+
+    /* 卡片悬停：顶部细线 */
+    .card {
+      position: relative;
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--sage);
+      transition: width var(--transition);
+      border-radius: 0 0 2px 2px;
+    }
+    .card:hover::after {
+      width: 80%;
+    }
+
+    /* 底部装饰 */
+    .footer {
+      position: relative;
+    }
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--sage-light), var(--terracotta), var(--sage-light), transparent);
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .card-media::before,
+      .card-media::after { display: none; }
+    }
+  </style>
 </head>
 <body>
 
@@ -53,6 +183,11 @@
       北京大学软式曲棍球队守门员资料整理计划。翻译英文守门教材，
       收集教学视频，记录实战经验。
     </p>
+    <div class="hero-rule">
+      <span class="hero-rule-line"></span>
+      <span class="hero-rule-dot"></span>
+      <span class="hero-rule-line"></span>
+    </div>
   </div>
 
   <div class="hero-scroll">
@@ -62,6 +197,12 @@
     <span>往下浏览</span>
   </div>
 </section>
+
+<div class="section-divider">
+  <svg viewBox="0 0 600 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 Q75,0 150,20 T300,20 T450,20 T600,20"/>
+  </svg>
+</div>
 
 <!-- 理论教材板块 -->
 <section class="section" id="theory-section">
