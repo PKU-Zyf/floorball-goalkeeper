@@ -291,6 +291,39 @@
       margin: 1.5rem auto 0;
     }
 
+    /* 友情链接 */
+    .friends-section {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 2rem 3rem;
+      text-align: center;
+    }
+    .friends-title {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+    .friends-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .friends-links a {
+      color: var(--sage-dark);
+      font-size: 0.9rem;
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(139, 168, 136, 0.3);
+      border-radius: 20px;
+      transition: all var(--transition);
+    }
+    .friends-links a:hover {
+      background: rgba(139, 168, 136, 0.1);
+      border-color: var(--sage);
+      color: var(--text);
+    }
+
     @media (max-width: 768px) {
       .card-media::before,
       .card-media::after { display: none; }
@@ -331,7 +364,7 @@
     <h1>软式曲棍球守门员基础</h1>
     <p class="subtitle">Floorball Goalkeeping Fundamentals</p>
     <p class="desc">
-      北京大学软式曲棍球队守门员资料整理计划。翻译英文守门教材，收集教学视频，记录实战经验。
+      北京大学软式曲棍球队守门员知识谱系，致力于为校园软式曲棍球守门员的自我提升提供从基础到进阶的、全面而可靠的参考材料。
     </p>
     <div class="hero-rule">
       <span class="hero-rule-line"></span>
@@ -368,8 +401,8 @@
         <div class="card-body">
           <h3>守门理论教材</h3>
           <p>
-            英文守门教材的中文翻译，中英对照排版，保留原始插图。
-            目前包含 IFF 官方守门员指导文件的完整翻译。
+            两本英文守门教材的中文翻译，中英对照排版，保留原始插图。
+            包含 IFF 官方守门员指导文件和芬兰顶级门将合著的《守门员宝典》。
           </p>
           <span class="card-action">进入学习 →</span>
         </div>
@@ -384,8 +417,7 @@
         <div class="card-body">
           <h3>教学视频</h3>
           <p>
-            收集 B 站上软曲守门相关的教学视频，按主题分类整理。
-            涵盖基本站位、扑救技巧、反应训练等内容。
+            收集 B 站上软曲守门相关的 16 支教学视频，按基础教学、热身训练、技术训练、实战视频、规则与介绍五个主题分类。
           </p>
           <span class="card-action">观看视频 →</span>
         </div>
@@ -401,13 +433,21 @@
         <div class="card-body">
           <h3>实战经验</h3>
           <p>
-            北大软曲男队和女队守门员的比赛经验记录。
-            从大学生业余比赛中积累的心得体会。
+            北京大学软式曲棍球队男队和女队守门员的比赛心得记录。目前正在整理积累中，欢迎投稿。
           </p>
           <span class="card-action">查看经验 →</span>
         </div>
       </a>
     </div>
+  </div>
+</section>
+
+<!-- 友情链接 -->
+<section class="friends-section">
+  <p class="friends-title">友情链接</p>
+  <div class="friends-links">
+    <a href="https://pku-floorball.github.io/pkufloorball/htmls/3-association/2-rk-cup/25-rk-cup/main.html" target="_blank" rel="noopener">北京大学软式曲棍球协会</a>
+    <a href="https://zjz1214.github.io/floorball-training/" target="_blank" rel="noopener">软式曲棍球训练手册</a>
   </div>
 </section>
 
